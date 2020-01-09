@@ -72,6 +72,23 @@ variable "vm_profile" {
   default = "gp2-24x224x2"
 }
 
+variable "bucket_name" {
+  description = "Name of your COS bucket"
+  default = "powerai-vision-trial-bucket"
+}
+
+variable "public_endpoint" {
+  description = "The COS public endpoint. Can be found under the Configuration tab of your bucket."
+  default = "s3.us-south.cloud-object-storage.appdomain.cloud"
+}
+
+variable "hmac_access_key" {
+  description = "Service credentials for your COS bucket. When creating your credentials be sure to 'Include HMAC Credential'."
+}
+
+variable "hmac_secret_key" {
+  description = "Service credentials for your COS bucket. When creating your credentials be sure to 'Include HMAC Credential'."
+}
 //grand plan:
 //cannot ssh from schematics to the host... why???
 
