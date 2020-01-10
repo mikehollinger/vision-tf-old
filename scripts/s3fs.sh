@@ -9,18 +9,18 @@ sudo apt install s3fs
 
 # Store your COS credentials to authenticate later.
 echo ${ACCESS_KEY_ID}:${SECRET_ACCESS_KEY} > ${BASEDIR}/.passwd-s3fs
-chmod 600 .passwd-s3fs
+chmod 600 ${BASEDIR}/.passwd-s3fs
 
 # Need to get a copy over existing data from PAIV to the COS bucket.
 # Create a temporary mount, copy the data across, and then unmount.
-mkdir ./temp/
-chmod 755 ./temp/
-s3fs ${BUCKET_NAME} ./temp/ -o url=http://${PUBLIC_ENDPOINT} -o passwd_file=${BASEDIR}/.passwd-s3fs
+mkdir ${BASEDIR}/temp/
+chmod 755 ${BASEDIR}/temp/
+s3fs ${BUCKET_NAME} ${BASEDIR}/temp/ -o url=http://${PUBLIC_ENDPOINT} -o passwd_file=${BASEDIR}/.passwd-s3fs
 echo "Copying existing files to COS..."
-cp -r /opt/powerai-vision/volume/data/ ./temp/
-umount ./temp/
+cp -r /opt/powerai-vision/volume/data/ ${BASEDIR}/temp/
+umount ${BASEDIR}/temp/
 #fusermount -uz ./temp/
-rm -r ./temp/
+rm -r ${BASEDIR}/temp/
 
 # Now that we have a backup of existing files, we can overwrite and mount at the point where
 # PAIV will save logs and user data.
