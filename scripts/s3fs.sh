@@ -20,7 +20,6 @@ echo "Copying existing files to COS..."
 cp -r /opt/powerai-vision/volume/data/ ${BASEDIR}/temp/
 umount ${BASEDIR}/temp/
 #fusermount -uz ./temp/
-rm -r ${BASEDIR}/temp/
 
 # Now that we have a backup of existing files, we can overwrite and mount at the point where
 # PAIV will save logs and user data.
