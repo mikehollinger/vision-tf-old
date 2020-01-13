@@ -24,8 +24,10 @@ chmod 600 ${BASEDIR}/.passwd-s3fs
 # Now that we have a backup of existing files, we can overwrite and mount at the point where
 # PAIV will save logs and user data.
 echo "Mounting at /opt/powerai-vision/volume/data/"
-mkdir /opt/powerai-vision/volume/data/ -p 
-s3fs ${BUCKET_NAME} /opt/powerai-vision/volume/data/ -o url=http://${PUBLIC_ENDPOINT} -o passwd_file=${BASEDIR}/.passwd-s3fs -o nonempty
+mkdir /opt/powerai-vision/volume/ -p
+chown 1979:1979 /opt/powerai-vision/volume/
+
+s3fs ${BUCKET_NAME} /opt/powerai-vision/volume/ -o url=http://${PUBLIC_ENDPOINT} -o passwd_file=${BASEDIR}/.passwd-s3fs -o nonempty
 
 # Cleanup
 echo "Cleanup..."
