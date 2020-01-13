@@ -1,0 +1,92 @@
+{
+    "name": "paiv-trial-persistent",
+    "type": [
+        "terraform-v1.0"
+    ],
+    "description": "Spins up an instance of PAIV, with persistent COS storage.",
+    "tags": [
+        "demo",
+        "persistent"
+    ],
+    "template_repo": {
+        "url": "https://github.ibm.com/Thomas-Farrand/vision-terraform"
+    },
+    "template_data": [
+        {
+            "folder": ".",
+            "type": "terraform-v1.0",
+            "variablestore": [
+                {
+                    "name": "ibmcloud_api_key",
+                    "secure": true,
+                    "value": "y6_06gQpUIkqjt_Y1JJCXF06URlaNrx2Cvxpl81Oouim",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "name": "vpc_basename",
+                    "secure": false,
+                    "value": "powerai-vision1-persistent",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "name": "cos_access_key",
+                    "secure": true,
+                    "value": "ea033f57c5c8424b94dd532cbb17eecc",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "name": "cos_secret_access_key",
+                    "secure": true,
+                    "value": "978465b391cfeffc8f057bd3b8d990db5564c23ffbd9d519",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "name": "cos_bucket_base",
+                    "secure": false,
+                    "value": "http://s3.direct.us-east.cloud-object-storage.appdomain.cloud/vision-cloud-trial",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "name": "vision_deb_name",
+                    "secure": false,
+                    "value": "powerai-vision_1.1.5.0-488.a6a155d~trial_ppc64el.deb",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "name": "vision_tar_name",
+                    "secure": false,
+                    "value": "powerai-vision-images-1.1.5.0.tar",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "name": "hmac_access_key",
+                    "secure": true,
+                    "value": "0cb039eb6290492a9f24e6ffec71c7d7",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "name": "hmac_secret_key",
+                    "secure": true,
+                    "value": "1b2cda43f1a59b521bf521bd1ee7f84c80d1dd7ec9df44de",
+                    "type": "string",
+                    "description": ""
+                },
+                {
+                    "name": "bucket_name",
+                    "secure": false,
+                    "value": "paiv-trial2",
+                    "type": "string",
+                    "description": ""
+                }
+            ]
+        }
+    ]
+}
