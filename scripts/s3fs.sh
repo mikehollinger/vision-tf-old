@@ -24,9 +24,13 @@ chmod 600 ${BASEDIR}/.passwd-s3fs
 # Now that we have a backup of existing files, we can overwrite and mount at the point where
 # PAIV will save logs and user data.
 echo "Mounting at /opt/powerai-vision/volume/data/"
-mkdir /opt/powerai-vision/volume/ -p
-chown 1979:1979 /opt/powerai-vision/volume/
-s3fs ${BUCKET_NAME} /opt/powerai-vision/volume/ -o url=http://${PUBLIC_ENDPOINT} -o passwd_file=${BASEDIR}/.passwd-s3fs -o gid=1979 -o uid=1979
+mkdir /opt/powerai-vision/volume/data/ -p
+chown 1979:1979 /opt/powerai-vision/volume/data/
+s3fs ${BUCKET_NAME} /opt/powerai-vision/volume/data/ -o url=http://${PUBLIC_ENDPOINT} -o passwd_file=${BASEDIR}/.passwd-s3fs -o gid=1979 -o uid=1979
+
+# Later down the line when PAIV starts, it will try to chown the data dir, so we comment that line out
+echo "Commenting out chown command in k8s_worker_start.sh"
+sed -i 's~chown -R ${AIV_USER}:${AIV_USER} ${VOL_DIR}/data~#chown -R ${AIV_USER}:${AIV_USER} ${VOL_DIR}/data~' /opt/powerai-vision/bin/k8s_worker_start.sh
 
 # Cleanup
 echo "Cleanup..."
