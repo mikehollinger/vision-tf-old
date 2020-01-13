@@ -26,8 +26,7 @@ chmod 600 ${BASEDIR}/.passwd-s3fs
 echo "Mounting at /opt/powerai-vision/volume/data/"
 mkdir /opt/powerai-vision/volume/ -p
 chown 1979:1979 /opt/powerai-vision/volume/
-
-s3fs ${BUCKET_NAME} /opt/powerai-vision/volume/ -o url=http://${PUBLIC_ENDPOINT} -o passwd_file=${BASEDIR}/.passwd-s3fs -o nonempty
+s3fs ${BUCKET_NAME} /opt/powerai-vision/volume/ -o url=http://${PUBLIC_ENDPOINT} -o passwd_file=${BASEDIR}/.passwd-s3fs -o gid=1979 -o uid=1979
 
 # Cleanup
 echo "Cleanup..."
