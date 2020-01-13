@@ -263,7 +263,6 @@ ENDENVTEMPL
 
   provisioner "remote-exec" {
     inline = [
-      "echo ${tls_private_key.vision_keypair.private_key_pem}",
       "set -e",
       "chmod +x /tmp/scripts*/*",
       "/tmp/scripts/ramdisk_tmp_create.sh",
