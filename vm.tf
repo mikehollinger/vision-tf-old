@@ -216,11 +216,6 @@ resource "null_resource" "provisioners" {
     "ibm_is_security_group_rule.sg1-tcp-rule"
   ]
 
-  provisioner "local-exec" {
-    command = "pwd; find .; git status; git reset HEAD --hard; find ."
-  }
-
-
   provisioner "file" {
     source = "scripts"
     destination = "/tmp"
@@ -235,6 +230,7 @@ resource "null_resource" "provisioners" {
   }
 
   provisioner "file" {
+    #todo review question - should this be a file env.tpl or is this more readable as an inline?
     content = <<ENDENVTEMPL
 #!/bin/bash -xe
 export RAMDISK=/tmp/ramdisk
