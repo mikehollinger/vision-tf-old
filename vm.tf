@@ -226,14 +226,20 @@ resource "null_resource" "provisioners" {
     "ibm_is_security_group_rule.sg1-tcp-rule"
   ]
 
-  provisioner "local-exec" {
-    command = "pwd; find .; git status; git reset HEAD --hard; find ."
-  }
-
-
   provisioner "file" {
-    source = "scripts"
-    destination = "/tmp"
+    content = <<ENDENVTEMPL
+#!/bin/bash -xe
+while ! grep "Cloud-init .* finished" /var/log/cloud-init.log; do
+    echo "$(date -Ins) Waiting for cloud-init to finish"
+    sleep 2
+done
+until sudo apt-get update; do sleep 5; done #  until apt-get succeeds after boot
+sudo apt-get install git -y
+git clone https://github.com/mikehollinger/vision-terraform.git /tmp/vision-terraform/
+mv /tmp/vision-terraform/scripts /tmp/
+rm -rf /tmp/vision-terraform/
+ENDENVTEMPL
+    destination = "/tmp/setup_env.sh"
     connection {
       type = "ssh"
       user = "root"
@@ -243,6 +249,22 @@ resource "null_resource" "provisioners" {
       private_key = "${tls_private_key.vision_keypair.private_key_pem}"
     }
   }
+  provisioner "remote-exec" {
+    inline = [
+      "set -e",
+      "chmod +x /tmp/setup_env.sh",
+      "/tmp/setup_env.sh",
+    ]
+    connection {
+      type = "ssh"
+      user = "root"
+      agent = false
+      timeout = "5m"
+      host = "${ibm_is_floating_ip.fip1.address}"
+      private_key = "${tls_private_key.vision_keypair.private_key_pem}"
+    }
+  }
+
 
   //  ##explicitly-move the signing script onto the system
   //  provisioner "file" {
