@@ -289,6 +289,7 @@ ENDENVTEMPL
       "/tmp/scripts/ramdisk_docker_create.sh",
       "/tmp/scripts/wait_bootfinished.sh",
       "/tmp/scripts/fetch_vision.sh",
+      "/tmp/scripts/install_gpu_drivers.sh",
       "/tmp/scripts/install_docker.sh",
       "/tmp/scripts/install_nvidiadocker2.sh",
       "/tmp/scripts/install_vision.sh",
@@ -309,4 +310,3 @@ ENDENVTEMPL
     }
   }
 }
-
