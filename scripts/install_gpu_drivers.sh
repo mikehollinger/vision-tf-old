@@ -2,7 +2,7 @@
 # Install NVIDIA Driver
 modinfo nvidia && which nvidia-smi
 has_gpu_driver=$?
-if !$has_gpu_driver; then
+if [ $has_gpu_driver -ne 0 ]; then
   echo "Installing Nvidia drivers."
   arch='ppc64le'
   version='418.116.00'
