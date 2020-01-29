@@ -14,6 +14,7 @@ if [ $has_gpu_driver -ne 0 ]; then
   chmod +x ${run_name}
   ./${run_name} -a -s
   nvidia-smi
+  apt-get -o Dpkg::Use-Pty=0 remove -qq gcc make
 else
   echo "Nvidia drivers installed on machine already. Skipping install of drivers."
 fi
