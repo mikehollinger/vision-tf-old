@@ -3,6 +3,8 @@
 modinfo nvidia && which nvidia-smi
 has_gpu_driver=$?
 if [ $has_gpu_driver -ne 0 ]; then
+  apt-get -o Dpkg::Use-Pty=0 update -qq  || echo " RC${?} Got an error on update???"
+  apt-get -o Dpkg::Use-Pty=0 install -qq gcc
   echo "Installing Nvidia drivers."
   arch='ppc64le'
   version='418.116.00'
