@@ -3,6 +3,7 @@
 modinfo nvidia && which nvidia-smi
 has_gpu_driver=$?
 if !has_gpu_driver; then
+  echo "Installing Nvidia drivers."
   arch='ppc64le'
   version='418.116.00'
   driver_version=${arch}-${version}
@@ -11,4 +12,6 @@ if !has_gpu_driver; then
   chmod +x ${run_name}
   ./${run_name} -a -s
   nvidia-smi
+else
+  echo "Nvidia drivers installed on machine already. Skipping install of drivers."
 fi
