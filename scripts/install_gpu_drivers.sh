@@ -3,6 +3,7 @@
 modinfo nvidia && which nvidia-smi
 has_gpu_driver=$?
 if [ $has_gpu_driver -ne 0 ]; then
+  # Install Nvidia
   apt-get -o Dpkg::Use-Pty=0 update -qq  || echo " RC${?} Got an error on update???"
   apt-get -o Dpkg::Use-Pty=0 install -qq build-essential
   echo "Installing Nvidia drivers."
@@ -14,6 +15,11 @@ if [ $has_gpu_driver -ne 0 ]; then
   chmod +x ${run_name}
   ./${run_name} -a -s
   nvidia-smi
+
+  # Install CUDA
+  apt-get install linux-headers-$(uname -r)
+  apt-get install cuda
+
   # apt-get -o Dpkg::Use-Pty=0 remove -qq gcc make
 else
   echo "Nvidia drivers installed on machine already. Skipping install of drivers."
