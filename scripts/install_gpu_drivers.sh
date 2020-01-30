@@ -8,6 +8,7 @@ if [ $has_gpu_driver -ne 0 ]; then
   apt-get -o Dpkg::Use-Pty=0 install -qq build-essential
   echo "Installing Nvidia drivers."
   arch='ppc64le'
+  distro="ubuntu1804"
   version='418.116.00'
   driver_version=${arch}-${version}
   run_name=NVIDIA-Linux-${driver_version}.run
@@ -18,6 +19,9 @@ if [ $has_gpu_driver -ne 0 ]; then
 
   # Install CUDA
   apt-get install linux-headers-$(uname -r)
+  dpkg -i cuda-repo-${distro}_${version}_${arch}.deb
+  apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/${distro}/${arch}/7fa2af80.pub
+  apt-get update
   apt-get install cuda
 
   # apt-get -o Dpkg::Use-Pty=0 remove -qq gcc make
