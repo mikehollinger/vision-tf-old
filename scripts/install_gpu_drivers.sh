@@ -13,11 +13,17 @@ if [ $has_gpu_driver -ne 0 ]; then
   distro="ubuntu1804"
   version='418.116.00'
   driver_version=${arch}-${version}
-  run_name=NVIDIA-Linux-${driver_version}.run
-  sudo wget http://us.download.nvidia.com/tesla/${version}/${run_name}
-  chmod +x ${run_name}
-  ./${run_name} -a -s
+  # run_name=NVIDIA-Linux-${driver_version}.run
+  # sudo wget http://us.download.nvidia.com/tesla/${version}/${run_name}
+  # chmod +x ${run_name}
+  # ./${run_name} -a -s
+  deb_name=http://us.download.nvidia.com/tesla/${version}/nvidia-driver-local-repo-${distro}-${version}_1.0-1_${arch}.deb
+  wget ${deb_name}
+  dpkg -i nvidia-driver-local-repo-ubuntu1804-418.*.deb
+  apt-get update
+  apt-get install cuda-drivers
   systemctl daemon-reload
+  systemctl enable nvidia-persistenced
   nvidia-smi
   # apt-get -o Dpkg::Use-Pty=0 remove -qq gcc make
 else
