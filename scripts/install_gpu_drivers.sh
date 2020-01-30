@@ -17,6 +17,7 @@ if [ $has_gpu_driver -ne 0 ]; then
   sudo wget http://us.download.nvidia.com/tesla/${version}/${run_name}
   chmod +x ${run_name}
   ./${run_name} -a -s
+  systemctl daemon-reload
   nvidia-smi
   # apt-get -o Dpkg::Use-Pty=0 remove -qq gcc make
 else
