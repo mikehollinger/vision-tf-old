@@ -21,7 +21,7 @@ if [ $has_gpu_driver -ne 0 ]; then
   wget ${deb_name}
   dpkg -i nvidia-driver-local-repo-ubuntu1804-418.*.deb
   apt-get update
-  apt-get install cuda-drivers
+  apt-get -o Dpkg::Use-Pty=0 install -qq nvidia-driver-418
   systemctl daemon-reload
   systemctl enable nvidia-persistenced
   nvidia-smi
