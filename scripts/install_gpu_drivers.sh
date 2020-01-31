@@ -20,6 +20,7 @@ if [ $has_gpu_driver -ne 0 ]; then
   deb_name=http://us.download.nvidia.com/tesla/418.116.00/nvidia-driver-local-repo-ubuntu1804-418.116.00_1.0-1_ppc64el.deb
   wget ${deb_name}
   dpkg -i nvidia-driver-local-repo-ubuntu*.deb
+  apt-key add /var/nvidia-driver-local*/*.pub
   apt-get -o Dpkg::Use-Pty=0 update -qq  || echo " RC${?} Got an error on update???"
   apt-get -o Dpkg::Use-Pty=0 install -qq nvidia-driver-418
   # Purge the repo
