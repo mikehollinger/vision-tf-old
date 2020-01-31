@@ -30,9 +30,4 @@ else
   echo "Nvidia drivers installed on machine already. Skipping install of drivers."
 fi
 
-systemctl is-active nvidia-persistenced
-
-if [ $? -ne 0 ]; then
-  echo "Enabling nvidia-persistenced"
-  systemctl enable nvidia-persistenced
-fi
+systemctl is-active nvidia-persistenced || systemctl enable nvidia-persistenced
