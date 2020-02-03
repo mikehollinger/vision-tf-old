@@ -5,9 +5,9 @@ has_gpu_driver=$?
 
 if [ $has_gpu_driver -ne 0 ]; then
   # Install Nvidia
-  apt-get -o Dpkg::Use-Pty=0 update -qq  || echo " RC${?} Got an error on update???"
+  # apt-get -o Dpkg::Use-Pty=0 update -qq  || echo " RC${?} Got an error on update???"
   # make and gcc required for Nvidia driver install
-  apt-get -o Dpkg::Use-Pty=0 install -qq build-essential
+  # apt-get -o Dpkg::Use-Pty=0 install -qq build-essential
   echo "Installing Nvidia drivers."
   arch='ppc64le'
   distro="ubuntu1804"
